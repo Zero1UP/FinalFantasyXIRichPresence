@@ -12,3 +12,7 @@ Current party count
 This has only been tested when using Windower
 ## How to use
 Run this before starting the game as it does require admin permissions (POL runs as admin when playing through windower)
+
+# Requirements
+.NET 5 is required and can be downloaded here:
+https://dotnet.microsoft.com/download/dotnet/5.0/runtime
