@@ -46,6 +46,12 @@ namespace FinalFantasyXIRichPresence
         {
             presence.Details = serverName + " - " + playerName + " (" + Collections.Zones[zoneID] + ")";
             presence.State = Collections.Jobs[mainJobID] + ": " + mainJobLevel.ToString() + " / " + Collections.Jobs[subJobID] + ": " + subJobLevel.ToString() ;
+            presence.Assets = new Assets()
+            {
+                LargeImageKey = "main",
+                LargeImageText = "Final Fantasy XI",
+                SmallImageKey = "main"
+            };
             presence.Party = new Party()
             {
                 Size = partyCount,
@@ -93,7 +99,7 @@ namespace FinalFantasyXIRichPresence
                 client.SetPresence(defaultPresence);
                 sessionStarted = false;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 client.SetPresence(defaultPresence);
