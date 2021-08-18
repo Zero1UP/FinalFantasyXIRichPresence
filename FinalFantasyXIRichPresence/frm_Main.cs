@@ -87,7 +87,10 @@ namespace FinalFantasyXIRichPresence
                     string playerName = mem.ReadString(ff11BaseAddress + 0x4CF6E0, Encoding.Default, false, 10);
                     string serverName = mem.ReadString(ff11BaseAddress + 0x4CF6F0, Encoding.Default, false, 15);
                     short partyCount = mem.Read<short>(ff11BaseAddress + 0x62312B, false);
-                    short mainJobLevel = mem.Read<short>(ff11BaseAddress + 0x9ADE06, false);
+                    //short mainJobLevel = mem.Read<short>(ff11BaseAddress + 0x9ADE06, false);
+
+                    //0x97703E level sync
+                    short mainJobLevel = mem.Read<byte>(ff11BaseAddress + 0x9ADE06, false);
                     short subJobLevel = mem.Read<short>(ff11BaseAddress + 0x977040, false);
                     short mainJobID = mem.Read<byte>(ff11BaseAddress + 0x9ADE08, false);
                     short subJobID = mem.Read<byte>(ff11BaseAddress + 0x97703F, false);
