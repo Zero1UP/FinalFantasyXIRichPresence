@@ -48,7 +48,6 @@ namespace FinalFantasyXIRichPresence
             this.MinimumSize = new System.Drawing.Size(242, 45);
             this.Name = "frm_Main";
             this.Text = "Final Fantasy XI Presence";
-            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.ResumeLayout(false);
 
         }
