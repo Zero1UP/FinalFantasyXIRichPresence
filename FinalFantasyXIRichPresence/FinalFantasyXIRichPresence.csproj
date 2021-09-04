@@ -6,6 +6,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <Platforms>AnyCPU;x86</Platforms>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
