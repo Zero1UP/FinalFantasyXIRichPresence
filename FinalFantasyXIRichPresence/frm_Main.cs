@@ -92,8 +92,8 @@ namespace FinalFantasyXIRichPresence
                     short subJobLevel = mem.Read<byte>(ff11BaseAddress + 0x977040, false);
                     short mainJobID = mem.Read<byte>(ff11BaseAddress + 0x9ADE08, false);
                     short subJobID = mem.Read<byte>(ff11BaseAddress + 0x97703F, false);
-                    short zoneID = mem.Read<byte>(ff11BaseAddress + 0x622892, false);
-                    
+                    short zoneID = BitConverter.ToInt16(mem.Read<byte>(ff11BaseAddress + 0x622892,2,false));
+
                     setPresence(serverName, mainJobLevel, subJobLevel, playerName, partyCount,mainJobID,subJobID,zoneID);
                     return;
                 }
