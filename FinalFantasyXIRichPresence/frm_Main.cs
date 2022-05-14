@@ -54,7 +54,7 @@ namespace FinalFantasyXIRichPresence
             };
             presence.Party = new Party()
             {
-                Size = partyCount,
+                Size = partyCount -1,
                 Max = 6,
                 ID = new Guid().ToString(),
                 Privacy = Party.PrivacySetting.Private
@@ -74,6 +74,7 @@ namespace FinalFantasyXIRichPresence
         }
         private void tmr_ProcessCheck_Tick(object sender, EventArgs e)
         {
+            //FFXiMain.dll+
             try
             {
                 Process polProcess = Process.GetProcessesByName(PROCESS_NAME)[0];
@@ -84,15 +85,15 @@ namespace FinalFantasyXIRichPresence
 
                 if (mem.IsRunning)
                 {
-                    string playerName = mem.ReadString(ff11BaseAddress + 0x4D1830, Encoding.Default, false, 10);
-                    string serverName = mem.ReadString(ff11BaseAddress + 0x4D1840, Encoding.Default, false, 15);
-                    short partyCount = mem.Read<byte>(ff11BaseAddress + 0x625283, false);
+                    string playerName = mem.ReadString(ff11BaseAddress + 0x4D50E0, Encoding.Default, false, 10);
+                    string serverName = mem.ReadString(ff11BaseAddress + 0x4D50F0, Encoding.Default, false, 15) ;
+                    short partyCount = mem.Read<byte>(ff11BaseAddress + 0x47F0C0, false);
                     //0x97703E level sync
-                    short mainJobLevel = mem.Read<byte>(ff11BaseAddress + 0x9AFF66, false);
-                    short subJobLevel = mem.Read<byte>(ff11BaseAddress + 0x979180, false);
-                    short mainJobID = mem.Read<byte>(ff11BaseAddress + 0x9AFF68, false);
-                    short subJobID = mem.Read<byte>(ff11BaseAddress + 0x97917F, false);
-                    short zoneID = BitConverter.ToInt16(mem.Read<byte>(ff11BaseAddress + 0x6249EA, 2,false));
+                    short mainJobLevel = mem.Read<byte>(ff11BaseAddress + 0x9B7D76, false);
+                    short subJobLevel = mem.Read<byte>(ff11BaseAddress + 0x97C9E0, false);
+                    short mainJobID = mem.Read<byte>(ff11BaseAddress + 0x9B7D78, false);
+                    short subJobID = mem.Read<byte>(ff11BaseAddress + 0x9B7E14, false);
+                    short zoneID = BitConverter.ToInt16(mem.Read<byte>(ff11BaseAddress + 0x62822A, 2,false));
 
                     setPresence(serverName, mainJobLevel, subJobLevel, playerName, partyCount,mainJobID,subJobID,zoneID);
                     return;
