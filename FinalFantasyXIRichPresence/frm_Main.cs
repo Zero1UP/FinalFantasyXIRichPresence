@@ -54,7 +54,7 @@ namespace FinalFantasyXIRichPresence
             };
             presence.Party = new Party()
             {
-                Size = partyCount -1,
+                Size = partyCount,
                 Max = 6,
                 ID = new Guid().ToString(),
                 Privacy = Party.PrivacySetting.Private
@@ -87,7 +87,7 @@ namespace FinalFantasyXIRichPresence
                 {
                     string playerName = mem.ReadString(ff11BaseAddress + 0x4D50E0, Encoding.Default, false, 10);
                     string serverName = mem.ReadString(ff11BaseAddress + 0x4D50F0, Encoding.Default, false, 15) ;
-                    short partyCount = mem.Read<byte>(ff11BaseAddress + 0x47F0C0, false);
+                    short partyCount = mem.Read<byte>(ff11BaseAddress + 0x628AC3, false);
                     //0x97703E level sync
                     short mainJobLevel = mem.Read<byte>(ff11BaseAddress + 0x9B7D76, false);
                     short subJobLevel = mem.Read<byte>(ff11BaseAddress + 0x97C9E0, false);
