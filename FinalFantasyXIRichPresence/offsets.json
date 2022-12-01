@@ -1,0 +1,10 @@
+﻿{
+  "playerNameOffset": "0x4D52E0",
+  "serverNameOffset": "0x4D52F0",
+  "partyCountOffset": "0x628CC3",
+  "mainJobLevelOffset": "0x9B7F76",
+  "subJobLevelOffset": "0x97CBE0",
+  "mainJobIdOffset": "0x9B7F78",
+  "subJobIdOffset": "0x9B8014",
+  "zoneIdOffset": "0x62842A"
+}

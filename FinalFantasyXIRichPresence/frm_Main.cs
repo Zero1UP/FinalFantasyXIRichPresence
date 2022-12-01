@@ -1,25 +1,23 @@
 ﻿using Binarysharp.MemoryManagement;
 using DiscordRPC;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using System.IO;
+
 namespace FinalFantasyXIRichPresence
 {
     public partial class frm_Main : Form
     {
+        private const string OFFSET_FILE_PATH = ".\\offsets.json";
         private const string PROCESS_NAME = "pol";
         private const string MODULE_NAME = "FFXiMain.dll";
         MemorySharp mem = null;
         public DiscordRpcClient client;
         bool sessionStarted = false;
-
+        Offsets ffxiOffsets = new Offsets();
         private RichPresence defaultPresence = new RichPresence()
         {
             Details = "Not Currently logged in.",
@@ -37,6 +35,13 @@ namespace FinalFantasyXIRichPresence
         public frm_Main()
         {
             InitializeComponent();
+
+            if (!File.Exists(OFFSET_FILE_PATH))
+            {
+                MessageBox.Show("Offsets.json file can not be found!");
+                return;
+            }
+            ffxiOffsets = JsonConvert.DeserializeObject<Offsets>(File.ReadAllText(OFFSET_FILE_PATH));
             client = new DiscordRpcClient("875985842450083850");
             client.Initialize();
             client.SetPresence(presence);
@@ -85,15 +90,15 @@ namespace FinalFantasyXIRichPresence
 
                 if (mem.IsRunning)
                 {
-                    string playerName = mem.ReadString(ff11BaseAddress + 0x4D52E0, Encoding.Default, false, 10);
-                    string serverName = mem.ReadString(ff11BaseAddress + 0x4D52F0, Encoding.Default, false, 15) ;
-                    short partyCount = mem.Read<byte>(ff11BaseAddress + 0x628CC3, false);
+                    string playerName = mem.ReadString(ff11BaseAddress + Convert.ToInt32(ffxiOffsets.PlayerNameOffset, 16), Encoding.Default, false, 10);
+                    string serverName = mem.ReadString(ff11BaseAddress + Convert.ToInt32(ffxiOffsets.ServerNameOffset, 16), Encoding.Default, false, 15) ;
+                    short partyCount = mem.Read<byte>(ff11BaseAddress + Convert.ToInt32(ffxiOffsets.PartyCountOffset, 16), false);
                     //0x97703E level sync
-                    short mainJobLevel = mem.Read<byte>(ff11BaseAddress + 0x9B7F76, false);
-                    short subJobLevel = mem.Read<byte>(ff11BaseAddress + 0x97CBE0, false);
-                    short mainJobID = mem.Read<byte>(ff11BaseAddress + 0x9B7F78, false);
-                    short subJobID = mem.Read<byte>(ff11BaseAddress + 0x9B8014, false);
-                    short zoneID = BitConverter.ToInt16(mem.Read<byte>(ff11BaseAddress + 0x62842A, 2,false));
+                    short mainJobLevel = mem.Read<byte>(ff11BaseAddress + Convert.ToInt32(ffxiOffsets.MainJobLevelOffset, 16), false);
+                    short subJobLevel = mem.Read<byte>(ff11BaseAddress + Convert.ToInt32(ffxiOffsets.SubJobLevelOffset, 16), false);
+                    short mainJobID = mem.Read<byte>(ff11BaseAddress + Convert.ToInt32(ffxiOffsets.MainJobIdOffset, 16), false);
+                    short subJobID = mem.Read<byte>(ff11BaseAddress + Convert.ToInt32(ffxiOffsets.SubJobIdOffset, 16), false);
+                    short zoneID = BitConverter.ToInt16(mem.Read<byte>(ff11BaseAddress + Convert.ToInt32(ffxiOffsets.ZoneIdOffset, 16), 2,false));
 
                     setPresence(serverName, mainJobLevel, subJobLevel, playerName, partyCount,mainJobID,subJobID,zoneID);
                     return;
