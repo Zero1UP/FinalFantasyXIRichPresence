@@ -85,15 +85,15 @@ namespace FinalFantasyXIRichPresence
 
                 if (mem.IsRunning)
                 {
-                    string playerName = mem.ReadString(ff11BaseAddress + 0x4D50E0, Encoding.Default, false, 10);
-                    string serverName = mem.ReadString(ff11BaseAddress + 0x4D50F0, Encoding.Default, false, 15) ;
-                    short partyCount = mem.Read<byte>(ff11BaseAddress + 0x628AC3, false);
+                    string playerName = mem.ReadString(ff11BaseAddress + 0x4D52E0, Encoding.Default, false, 10);
+                    string serverName = mem.ReadString(ff11BaseAddress + 0x4D52F0, Encoding.Default, false, 15) ;
+                    short partyCount = mem.Read<byte>(ff11BaseAddress + 0x628CC3, false);
                     //0x97703E level sync
-                    short mainJobLevel = mem.Read<byte>(ff11BaseAddress + 0x9B7D76, false);
-                    short subJobLevel = mem.Read<byte>(ff11BaseAddress + 0x97C9E0, false);
-                    short mainJobID = mem.Read<byte>(ff11BaseAddress + 0x9B7D78, false);
-                    short subJobID = mem.Read<byte>(ff11BaseAddress + 0x9B7E14, false);
-                    short zoneID = BitConverter.ToInt16(mem.Read<byte>(ff11BaseAddress + 0x62822A, 2,false));
+                    short mainJobLevel = mem.Read<byte>(ff11BaseAddress + 0x9B7F76, false);
+                    short subJobLevel = mem.Read<byte>(ff11BaseAddress + 0x97CBE0, false);
+                    short mainJobID = mem.Read<byte>(ff11BaseAddress + 0x9B7F78, false);
+                    short subJobID = mem.Read<byte>(ff11BaseAddress + 0x9B8014, false);
+                    short zoneID = BitConverter.ToInt16(mem.Read<byte>(ff11BaseAddress + 0x62842A, 2,false));
 
                     setPresence(serverName, mainJobLevel, subJobLevel, playerName, partyCount,mainJobID,subJobID,zoneID);
                     return;
