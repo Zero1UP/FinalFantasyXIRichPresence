@@ -41,9 +41,9 @@ namespace FinalFantasyXIRichPresence
             client.SetPresence(presence);
         }
 
-        private void setPresence(string serverName, short mainJobLevel,short subJobLevel, string playerName, int partyCount,short mainJobID,short subJobID,short zoneID)
+        private void setPresence(short serverId, short mainJobLevel,short subJobLevel, string playerName, int partyCount,short mainJobID,short subJobID,short zoneID)
         {
-            presence.Details = serverName + " - " + playerName + " (" + Collections.Zones[zoneID] + ")";
+            presence.Details = Collections.Servers[serverId] + " - " + playerName + " (" + Collections.Zones[zoneID] + ")";
             presence.State = Collections.Jobs[mainJobID] + ": " + mainJobLevel.ToString() + " / " + Collections.Jobs[subJobID] + ": " + subJobLevel.ToString() ;
             presence.Assets = new Assets()
             {
@@ -76,7 +76,7 @@ namespace FinalFantasyXIRichPresence
             try
             {                
                 pData = JsonConvert.DeserializeObject<PlayerData>(File.ReadAllText(OFFSET_FILE_PATH));
-                setPresence("N/A", pData.main_job_level, pData.sub_job_level, pData.name, pData.party_count, pData.main_jobId, pData.sub_jobId, pData.zone_id);
+                setPresence(pData.server_id, pData.main_job_level, pData.sub_job_level, pData.name, pData.party_count, pData.main_jobId, pData.sub_jobId, pData.zone_id);
 
             }
             catch (Exception ex)

@@ -96,7 +96,6 @@ end
 
 function time_changed(new,old)
 	if did_data_change(player_table) then
-		windower.console.write("Data updated")
 		get_player_data()
 	end
 end
