@@ -13,13 +13,10 @@
 
   <ItemGroup>
     <PackageReference Include="DiscordRichPresence" Version="1.0.175" />
-    <PackageReference Include="MemorySharp" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="offsets.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Folder Include="Addon\ffxiplayerinfodrp\data\" />
   </ItemGroup>
 
 </Project>
