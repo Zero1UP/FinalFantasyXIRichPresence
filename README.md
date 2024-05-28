@@ -9,12 +9,16 @@ Current party count
 ![RichPresence](https://i.imgur.com/ncRwvMc.png)
 
 ## How to use
-Run this before starting the game as it does require admin permissions (POL runs as admin when playing through windower)
+Starting with this new update, I have moved the data collection part of this program to be an addon for Windower 4. To use this addon simply download the latest release and copy the folder into windowerFolder/addons.
+You will also need to make an edit to scripts/init.txt. You will need to add the following line: 
+```
+lua load ffxiplayerinfodrp
+```
+You will then need to run 'FinalFantasyXIRichPresence.exe' from the addons/ffxiplayerinfodrp folder whenever you want to display the rich presence data on discord.
 
-## Updating Offsets
-With the release of 1.1.0 I have changed the program to read from the Offsets.json file rather than have to compile a new build everytime the game updates. 
-All you have to do is find the new offsets and replace them in the json file. Make sure that they start with 0x.
 
 # Requirements
+Windower 4
+https://www.windower.net/
 .NET 5 is required and can be downloaded here:
 https://dotnet.microsoft.com/download/dotnet/5.0/runtime
