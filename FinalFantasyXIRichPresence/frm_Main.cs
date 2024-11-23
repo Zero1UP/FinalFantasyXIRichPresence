@@ -3,6 +3,7 @@ using System;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.IO;
+using System.Text;
 
 namespace FinalFantasyXIRichPresence
 {
@@ -45,9 +46,14 @@ namespace FinalFantasyXIRichPresence
         private void setPresence(short serverId, short mainJobLevel, short subJobLevel, string playerName, int partyCount, short mainJobID, short subJobID, short zoneID)
         {
             string customServerName = Properties.Settings.Default["CustomServerName"].ToString();
+            StringBuilder details = new StringBuilder();
+            details.AppendLine(string.IsNullOrEmpty(customServerName) ? Collections.Servers[serverId] : customServerName);
+            details.AppendLine(" - ");
+            details.AppendLine(playerName);
+            details.AppendLine(": ");
+            details.AppendLine(Collections.Zones[zoneID]);
 
-
-            presence.Details = string.IsNullOrEmpty(customServerName) ? Collections.Servers[serverId] : customServerName + " - " + playerName + " (" + Collections.Zones[zoneID] + ")";
+            presence.Details = details.ToString();
             presence.State = Collections.Jobs[mainJobID] + ": " + mainJobLevel.ToString() + " / " + Collections.Jobs[subJobID] + ": " + subJobLevel.ToString();
             presence.Assets = new Assets()
             {
