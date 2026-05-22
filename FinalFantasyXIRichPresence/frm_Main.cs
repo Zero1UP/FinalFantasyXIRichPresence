@@ -9,7 +9,12 @@ namespace FinalFantasyXIRichPresence
 {
     public partial class frm_Main : Form
     {
-        private const string OFFSET_FILE_PATH = ".\\data\\data.json";
+        private static readonly string OFFSET_FILE_PATH =
+            Path.Combine(
+                AppDomain.CurrentDomain.BaseDirectory,
+                "data",
+                "data.json"
+            );
         public DiscordRpcClient client;
         bool sessionStarted = false;
         PlayerData pData = new PlayerData();

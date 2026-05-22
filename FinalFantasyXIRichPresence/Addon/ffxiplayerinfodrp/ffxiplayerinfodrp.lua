@@ -26,12 +26,19 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _addon.name    = 'ffxiplayerinfodrp'
 _addon.author  = '1UP'
-_addon.version = '1.0'
+_addon.version = '1.1'
 require('tables')
 local file  = require('files')
 local json = require "json"
 local player_table = {}
 local self_storage  = file.new('data\\data.json')
+local addon_path = windower.addon_path
+local exe_name = 'FinalFantasyXIRichPresence.exe'
+function load()
+	get_player_data()
+	windower.execute(addon_path .. 'FinalFantasyXIRichPresence.exe')
+	
+end
 
 function get_player_data()
     if windower.ffxi.get_info().logged_in then
@@ -114,13 +121,16 @@ function unload()
 		}
 		data_to_write = json.encode(player_table)
 		self_storage:write(data_to_write)
+		
+		windower.execute(
+			'C:\\Windows\\System32\\taskkill.exe',
+			{
+				'/IM',
+				exe_name 
+			}
+		)		
 end
 
 windower.register_event('time change', time_changed)
-windower.register_event('load', get_player_data)
+windower.register_event('load', load)
 windower.register_event('unload', unload)
-
---[[
-windower.register_event('addon command', function(command1, ...)
-	get_player_data()
-end)]]--
