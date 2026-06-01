@@ -14,8 +14,6 @@ You will also need to make an edit to scripts/init.txt. You will need to add the
 ```
 lua load ffxiplayerinfodrp
 ```
-You will then need to run 'FinalFantasyXIRichPresence.exe' from the addons/ffxiplayerinfodrp folder whenever you want to display the rich presence data on discord.
-
 
 # Requirements
 Windower 4
